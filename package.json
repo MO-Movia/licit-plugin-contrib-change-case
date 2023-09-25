@@ -1,9 +1,11 @@
 {
   "name": "@modusoperandi/licit-changecase",
   "version": "0.0.1",
+  "type": "module",
   "subversion": "1",
   "description": "changecase plugin built with ProseMirror",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": ""

@@ -5,7 +5,7 @@ import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
 
 // Code to convert the selected text into SentanceCase
 
-class SentanceCaseCommand extends UICommand {
+export class SentanceCaseCommand extends UICommand {
 
   // To check if any text is selected
 
@@ -38,7 +38,7 @@ class SentanceCaseCommand extends UICommand {
     tr = this.toLower(state, tr);
     state.doc.nodesBetween(from, to, (node, pos) => {
       let currentSentence = '';
-      if (node.type.name === "paragraph") {
+      if (node.type.name === 'paragraph') {
         paragraphContent = node.textContent;
       }
       if (node.isText && pos <= to && pos + node.nodeSize >= from) {
@@ -66,14 +66,14 @@ class SentanceCaseCommand extends UICommand {
   parseSelectedText(txt: string) {
     let retString = '';
     const regex = /\s/; // Regex to split the string on one or more whitespace characters
-    let txtArray = txt.split(regex);
+    const txtArray = txt.split(regex);
     let previousBlock = '';
     if (txtArray && txtArray.length > 1) {
       retString = txtArray.map((str, index) => {
         if (index > 0) {
           previousBlock = txtArray[index - 1];
           if (this.processPreviousContent(previousBlock, str)) {
-            let caps = str.charAt(0).toUpperCase();
+            const caps = str.charAt(0).toUpperCase();
             return caps + str.substring(1);
           }
           return str;
@@ -91,10 +91,10 @@ class SentanceCaseCommand extends UICommand {
     let isParagrphStart = false;
     if (prevCont && prevCont.trim().length > 0) {
       let delimeitorSepChars;
-      const charectersToInclude = ['>', '}', ')', ']', `"`];
+      const charectersToInclude = ['>', '}', ')', ']', '"'];
       const startsWithSpaces = /^\s+/;
       const endWithSpaces = / +$/;
-      if (prevCont === "." || prevCont === "?" || prevCont === "!") {
+      if (prevCont === '.' || prevCont === '?' || prevCont === '!') {
         return true;
       }
       delimeitorSepChars = prevCont.split('.');
@@ -106,8 +106,8 @@ class SentanceCaseCommand extends UICommand {
       }
       if (delimeitorSepChars.length > 0) {
         delimeitorSepChars = delimeitorSepChars.reverse();
-        if ((delimeitorSepChars.length > 1) && (delimeitorSepChars[0].trim() === "" ||
-          delimeitorSepChars[0].trim() === "?" || delimeitorSepChars[0].trim() === "!" ||
+        if ((delimeitorSepChars.length > 1) && (delimeitorSepChars[0].trim() === '' ||
+          delimeitorSepChars[0].trim() === '?' || delimeitorSepChars[0].trim() === '!' ||
           endWithSpaces.test(prevCont) || startsWithSpaces.test(currentString))) {
           return true;
         } else {
@@ -115,7 +115,7 @@ class SentanceCaseCommand extends UICommand {
             if (isParagrphStart) {
               return true;
             }
-            for (let char of str) {
+            for (const char of str) {
               if (charectersToInclude.indexOf(char) < 0) {
                 isParagrphStart = false;
                 break;
@@ -161,6 +161,7 @@ class SentanceCaseCommand extends UICommand {
       const element = strs[index];
       const matches = element.match(regex);
       if (matches) {
+        return;
 
       }
     }
@@ -187,4 +188,4 @@ class SentanceCaseCommand extends UICommand {
 
 
 }
-export default SentanceCaseCommand;
+

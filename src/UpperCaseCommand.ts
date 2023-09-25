@@ -3,9 +3,9 @@ import { Transform } from 'prosemirror-transform';
 import { EditorView } from 'prosemirror-view';
 import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
 
-// Code to convert the selected text into LowerCase 
+// Code to convert the selected text into LowerCase
 
-class UpperCaseCommand extends UICommand {
+export class UpperCaseCommand extends UICommand {
 
 // To check if any text is selected
 
@@ -22,8 +22,8 @@ class UpperCaseCommand extends UICommand {
     return false;
   };
 
-  
-// Logic to convert text to uppercase and assign them marks 
+
+// Logic to convert text to uppercase and assign them marks
 
   execute = (
     state: EditorState,
@@ -48,7 +48,6 @@ class UpperCaseCommand extends UICommand {
     });
     dispatch(tr.scrollIntoView());
     return true;
-  }
-};
+  };
+}
 
-export default UpperCaseCommand;
