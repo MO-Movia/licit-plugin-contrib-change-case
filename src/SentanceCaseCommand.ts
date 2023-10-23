@@ -1,4 +1,4 @@
-import { EditorState } from 'prosemirror-state';
+import { EditorState} from 'prosemirror-state';
 import { Transform } from 'prosemirror-transform';
 import { EditorView } from 'prosemirror-view';
 import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
@@ -168,7 +168,7 @@ export class SentanceCaseCommand extends UICommand {
 
   }
 
-  toLower(state: EditorState, tr: any) {
+  toLower(state: EditorState, tr) {
     //  Conversion of selected text to lower case
     const { from, to } = state.selection;
     state.doc.nodesBetween(from, to, (node, pos) => {
