@@ -22,7 +22,6 @@
     "ci:build": "npm run clean && npm run build:ts && npm run webpack && npm run build:babel",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
-    "prepare": "npm run build:dist",
     "test": "jest --coverage",
     "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
     "ci:bom": "cyclonedx-bom -o dist/bom.xml"
@@ -98,6 +97,9 @@
   },
   "dependencies": {
     "@modusoperandi/licit-ui-commands": "^0.1.18"
+  },
+  "overrides": {
+    "semver": "^7.5.2"
   },
   "importSort": {
     ".js": {
