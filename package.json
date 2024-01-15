@@ -96,7 +96,7 @@
     "write-file-webpack-plugin": "^4.5.1"
   },
   "peerDependencies": {
-    "@modusoperandi/licit-ui-commands": "^0.1.18"
+    "@modusoperandi/licit-ui-commands": "1.0.0"
   },
   "overrides": {
     "semver": "^7.5.2"
