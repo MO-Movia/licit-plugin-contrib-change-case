@@ -1,4 +1,4 @@
-import { EditorState} from 'prosemirror-state';
+import { EditorState } from 'prosemirror-state';
 import { Transform } from 'prosemirror-transform';
 import { EditorView } from 'prosemirror-view';
 import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
@@ -6,13 +6,11 @@ import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
 // Code to convert the selected text into SentanceCase
 
 export class SentanceCaseCommand extends UICommand {
-
   // To check if any text is selected
 
   isEnabled = (state: EditorState): boolean => {
     return this._isEnabled(state);
   };
-
 
   _isEnabled = (state: EditorState): boolean => {
     const tr = state.tr;
@@ -25,13 +23,9 @@ export class SentanceCaseCommand extends UICommand {
   execute = (
     state: EditorState,
     dispatch: (tr: Transform) => void | undefined,
-    _view: EditorView | undefined,
+    _view: EditorView | undefined
   ): boolean => {
-    const {
-      from,
-      to,
-      $anchor
-    } = state.selection;
+    const { from, to, $anchor } = state.selection;
     let tr = state.tr;
     let prevNode = null;
     let paragraphContent = '';
@@ -56,7 +50,11 @@ export class SentanceCaseCommand extends UICommand {
           currentSentence = this.checkPreviousNode(prevNode, text);
         }
 
-        tr.replaceWith(start, end, state.schema.text(currentSentence, node.marks));
+        tr.replaceWith(
+          start,
+          end,
+          state.schema.text(currentSentence, node.marks)
+        );
       }
     });
     dispatch(tr.scrollIntoView());
@@ -69,18 +67,20 @@ export class SentanceCaseCommand extends UICommand {
     const txtArray = txt.split(regex);
     let previousBlock = '';
     if (txtArray && txtArray.length > 1) {
-      retString = txtArray.map((str, index) => {
-        if (index > 0) {
-          previousBlock = txtArray[index - 1];
-          if (this.processPreviousContent(previousBlock, str)) {
-            const caps = str.charAt(0).toUpperCase();
-            return caps + str.substring(1);
+      retString = txtArray
+        .map((str, index) => {
+          if (index > 0) {
+            previousBlock = txtArray[index - 1];
+            if (this.processPreviousContent(previousBlock, str)) {
+              const caps = str.charAt(0).toUpperCase();
+              return caps + str.substring(1);
+            }
+            return str;
+          } else {
+            return str;
           }
-          return str;
-        } else {
-          return str;
-        }
-      }).join(' ');
+        })
+        .join(' ');
       return retString;
     } else {
       return txt;
@@ -106,9 +106,14 @@ export class SentanceCaseCommand extends UICommand {
       }
       if (delimeitorSepChars.length > 0) {
         delimeitorSepChars = delimeitorSepChars.reverse();
-        if ((delimeitorSepChars.length > 1) && (delimeitorSepChars[0].trim() === '' ||
-          delimeitorSepChars[0].trim() === '?' || delimeitorSepChars[0].trim() === '!' ||
-          endWithSpaces.test(prevCont) || startsWithSpaces.test(currentString))) {
+        if (
+          delimeitorSepChars.length > 1 &&
+          (delimeitorSepChars[0].trim() === '' ||
+            delimeitorSepChars[0].trim() === '?' ||
+            delimeitorSepChars[0].trim() === '!' ||
+            endWithSpaces.test(prevCont) ||
+            startsWithSpaces.test(currentString))
+        ) {
           return true;
         } else {
           for (const str of delimeitorSepChars) {
@@ -146,26 +151,27 @@ export class SentanceCaseCommand extends UICommand {
     if (matches) {
       const specialCharacters = matches[1];
       const remainingString = matches[2];
-      const capitalizedFirstChar = specialCharacters.charAt(specialCharacters.length - 1).toUpperCase();
-      const finalString = specialCharacters.slice(0, specialCharacters.length - 1) + capitalizedFirstChar + remainingString;
+      const capitalizedFirstChar = specialCharacters
+        .charAt(specialCharacters.length - 1)
+        .toUpperCase();
+      const finalString =
+        specialCharacters.slice(0, specialCharacters.length - 1) +
+        capitalizedFirstChar +
+        remainingString;
       return finalString;
     }
     return inputString;
   }
 
-
   checkDelimeter(strs) {
     // Checking Delimeters to see if it is a sentance
     const regex = /[?}>)\]]/g;
-    for (let index = 0; index < strs.length; index++) {
-      const element = strs[index];
+    for (const element of strs) {
       const matches = element.match(regex);
       if (matches) {
         return;
-
       }
     }
-
   }
 
   toLower(state: EditorState, tr) {
@@ -179,13 +185,14 @@ export class SentanceCaseCommand extends UICommand {
 
         if (text !== text.toLowerCase()) {
           const transformedText = text.toLowerCase();
-          tr.replaceWith(start, end, state.schema.text(transformedText, node.marks));
+          tr.replaceWith(
+            start,
+            end,
+            state.schema.text(transformedText, node.marks)
+          );
         }
       }
     });
     return tr;
   }
-
-
 }
-
