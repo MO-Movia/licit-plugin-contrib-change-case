@@ -195,4 +195,23 @@ export class SentanceCaseCommand extends UICommand {
     });
     return tr;
   }
+
+  renderLabel() {
+    return null;
+  }
+  isActive(): boolean {
+    return true;
+  }
+  waitForUserInput(): Promise<null> {
+    return Promise.resolve(null);
+  }
+  executeWithUserInput(): boolean {
+    return true;
+  }
+  cancel(): void {
+    return null;
+  }
+  executeCustom(_state: EditorState, tr: Transform): Transform {
+    return tr;
+  }
 }
