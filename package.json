@@ -25,7 +25,7 @@
     "@modusoperandi/licit-ui-commands": "^1.0.0"
   },
   "devDependencies": {
-    "@cyclonedx/bom": "^4.0.5",
+    "@cyclonedx/bom": "^4.1.0",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
