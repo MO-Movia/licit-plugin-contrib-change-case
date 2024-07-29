@@ -1,4 +1,7 @@
 module.exports = {
+  env: {
+    'browser': true
+  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
@@ -95,10 +98,11 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['**/*.test.ts', '**/*.test.tsx'],
       // enable jest globals in test files
       plugins: ['jest'],
       env: {
+        'node': true,
         'jest/globals': true,
       },
     },
