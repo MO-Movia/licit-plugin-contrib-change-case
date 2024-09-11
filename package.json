@@ -28,7 +28,7 @@
     "@cyclonedx/bom": "^4.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react": "^16.0.0",
+    "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.5.2",
