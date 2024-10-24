@@ -4,6 +4,7 @@ import { Plugin, PluginKey } from 'prosemirror-state';
 import {UpperCaseCommand} from './UpperCaseCommand';
 import {LowerCaseCommand} from './LowerCaseCommand';
 import {SentanceCaseCommand} from './SentanceCaseCommand';
+import {DarkThemeIcon, LightThemeIcon} from './images';
 
 export class ChangeCasePlugin extends Plugin {
     _view: EditorView = null;
@@ -13,16 +14,26 @@ export class ChangeCasePlugin extends Plugin {
         });
     }
 
-    initButtonCommands() {
+    initButtonCommands(theme: string): unknown {
+        let image = null;
+        if ('light' == theme) {
+          image = LightThemeIcon;
+        } else {
+          image = DarkThemeIcon;
+        }
+
         return {
-            '[font_download] Change Case': [
-                {
-                    'UpperCase': new UpperCaseCommand(),
-                    'LowerCase': new LowerCaseCommand(),
-                    'SentanceCase': new SentanceCaseCommand(),
-                },
+            [`[${image}] Change Case`]: [
+              {
+                'UpperCase': new UpperCaseCommand(),
+                'LowerCase': new LowerCaseCommand(),
+                'SentenceCase': new SentanceCaseCommand(),
+              },
             ],
-        };
+          };
+      
     }
+
+
 }
 
