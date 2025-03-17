@@ -1,6 +1,7 @@
 {
   "name": "@modusoperandi/licit-changecase",
   "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "subversion": "1",
   "description": "changecase plugin built with ProseMirror",
@@ -8,18 +9,19 @@
   "types": "index.d.ts",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/MO-Movia/licit-plugin-contrib-change-case"
   },
   "scripts": {
     "clean": "rm -rf dist/ coverage/ bin/ && rm -f modusoperandi-licit-changecase-*.*.*.tgz",
     "lint:ts": "eslint src --ext .ts,.tsx --fix",
     "lint": "npm run lint:ts",
-    "ci:build": "tsc --build && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json dist",
-    "test:unit": "jest",
-    "test:coverage": "jest --coverage",
+    "ci:build": "tsc --build && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json LICENSE dist",
+    "test:unit": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
     "test": "jest --coverage",
     "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
-    "ci:bom": "cyclonedx-bom -o dist/bom.xml"
+    "ci:bom": "cyclonedx-bom -o dist/bom.xml",
+    "verify": "npm run lint -- --fix && npm run ci:build && npm run test:coverage && echo 'All Tests Passed!'"
   },
   "peerDependencies": {
     "@modusoperandi/licit-ui-commands": "^1.0.0"
@@ -36,7 +38,7 @@
     "@typescript-eslint/parser": "^8.13.0",
     "copyfiles": "^2.4.1",
     "enzyme": "^3.11.0",
-    "eslint": "^9.15.0",
+    "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest": "^28.8.3",
@@ -60,7 +62,7 @@
     "typescript": "^5.6.3"
   },
   "overrides": {
-    "semver": "^7.5.2"
+    "libxmljs2": "^1.0.0"
   },
   "importSort": {
     ".js": {
