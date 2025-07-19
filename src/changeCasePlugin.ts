@@ -3,7 +3,7 @@ import { EditorView } from 'prosemirror-view';
 import { Plugin, PluginKey } from 'prosemirror-state';
 import {UpperCaseCommand} from './UpperCaseCommand';
 import {LowerCaseCommand} from './LowerCaseCommand';
-import {SentanceCaseCommand} from './SentanceCaseCommand';
+import {SentanceCaseCommand} from './SentenceCaseCommand';
 import {DarkThemeIcon, LightThemeIcon} from './images';
 
 export class ChangeCasePlugin extends Plugin {
