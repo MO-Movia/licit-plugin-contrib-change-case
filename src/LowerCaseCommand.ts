@@ -14,10 +14,7 @@ export class LowerCaseCommand extends UICommand {
 
   _isEnabled = (state: EditorState): boolean => {
     const tr = state.tr;
-    if (!tr.selection.empty) {
-      return true;
-    }
-    return false;
+    return !tr.selection.empty;
   };
 
   // Logic to convert text to lowercase and assign them marks
@@ -49,7 +46,7 @@ export class LowerCaseCommand extends UICommand {
     return true;
   };
 
-  renderLabel() {
+  renderLabel(): null {
     return null;
   }
   isActive(): boolean {

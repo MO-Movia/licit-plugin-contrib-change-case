@@ -14,10 +14,7 @@ export class SentanceCaseCommand extends UICommand {
 
   _isEnabled = (state: EditorState): boolean => {
     const tr = state.tr;
-    if (!tr.selection.empty) {
-      return true;
-    }
-    return false;
+    return !tr.selection.empty;
   };
 
   execute = (
@@ -27,7 +24,7 @@ export class SentanceCaseCommand extends UICommand {
   ): boolean => {
     const { from, to, $anchor } = state.selection;
     let tr = state.tr;
-    let prevNode = null;
+    let prevNode: string | undefined;
     let paragraphContent = '';
     tr = this.toLower(state, tr);
     state.doc.nodesBetween(from, to, (node, pos) => {
@@ -44,7 +41,7 @@ export class SentanceCaseCommand extends UICommand {
           currentSentence = this.parseSelectedText(currentSentence);
           prevNode = currentSentence;
         } else {
-          if (prevNode === null && $anchor.nodeBefore) {
+          if (prevNode === undefined && $anchor.nodeBefore) {
             prevNode = $anchor.nodeBefore.text;
           }
           currentSentence = this.checkPreviousNode(prevNode, text);
@@ -61,7 +58,7 @@ export class SentanceCaseCommand extends UICommand {
     return true;
   };
 
-  parseSelectedText(txt: string) {
+  parseSelectedText(txt: string): string {
     let retString = '';
     const regex = /\s/; // Regex to split the string on one or more whitespace characters
     const txtArray = txt.split(regex);
@@ -87,13 +84,12 @@ export class SentanceCaseCommand extends UICommand {
     }
   }
 
-  processPreviousContent(prevCont: string, currentString: string) {
+  processPreviousContent(prevCont: string, currentString: string): boolean {
     let isParagrphStart = false;
     if (prevCont && prevCont.trim().length > 0) {
       let delimeitorSepChars;
       const charectersToInclude = ['>', '}', ')', ']', '"'];
-      const startsWithSpaces = /^\s+/;
-      const endWithSpaces = / +$/;
+      const startsWithSpaces = /^\s{1, 1000}/;
       if (prevCont === '.' || prevCont === '?' || prevCont === '!') {
         return true;
       }
@@ -111,7 +107,7 @@ export class SentanceCaseCommand extends UICommand {
           (delimeitorSepChars[0].trim() === '' ||
             delimeitorSepChars[0].trim() === '?' ||
             delimeitorSepChars[0].trim() === '!' ||
-            endWithSpaces.test(prevCont) ||
+            prevCont.endsWith(' {1, 1000}') ||
             startsWithSpaces.test(currentString))
         ) {
           return true;
@@ -121,7 +117,7 @@ export class SentanceCaseCommand extends UICommand {
               return true;
             }
             for (const char of str) {
-              if (charectersToInclude.indexOf(char) < 0) {
+              if (!charectersToInclude.includes(char)) {
                 isParagrphStart = false;
                 break;
               } else {
@@ -135,7 +131,7 @@ export class SentanceCaseCommand extends UICommand {
     return isParagrphStart;
   }
 
-  checkPreviousNode(str: string, currentString: string) {
+  checkPreviousNode(str: string, currentString: string): string {
     // Checking previous content so that we can identify if it is the first letter of the sentance
     if (this.processPreviousContent(str, currentString)) {
       return this.capitalizeFirstParagraphCharacter(currentString);
@@ -144,10 +140,10 @@ export class SentanceCaseCommand extends UICommand {
     }
   }
 
-  capitalizeFirstParagraphCharacter(inputString) {
+  capitalizeFirstParagraphCharacter(inputString: string): string {
     // Capitalizing the starting letter of a paragraph
-    const regex = /^([^a-zA-Z]*[a-z])(.*)/;
-    const matches = inputString.match(regex);
+    const regex = /^([^a-zA-Z]{0, 1000}[a-z])(.{0, 1000})/;
+    const matches = regex.exec(inputString);
     if (matches) {
       const specialCharacters = matches[1];
       const remainingString = matches[2];
@@ -163,18 +159,19 @@ export class SentanceCaseCommand extends UICommand {
     return inputString;
   }
 
-  checkDelimeter(strs) {
+  checkDelimeter(strs: string): boolean {
     // Checking Delimeters to see if it is a sentance
     const regex = /[?}>)\]]/g;
     for (const element of strs) {
       const matches = element.match(regex);
       if (matches) {
-        return;
+        return true;
       }
     }
+    return false;
   }
 
-  toLower(state: EditorState, tr) {
+  toLower(state: EditorState, tr: Transform): Transform {
     //  Conversion of selected text to lower case
     const { from, to } = state.selection;
     state.doc.nodesBetween(from, to, (node, pos) => {
@@ -196,7 +193,7 @@ export class SentanceCaseCommand extends UICommand {
     return tr;
   }
 
-  renderLabel() {
+  renderLabel(): null {
     return null;
   }
   isActive(): boolean {

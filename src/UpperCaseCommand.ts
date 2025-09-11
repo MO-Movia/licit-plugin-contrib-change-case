@@ -14,10 +14,7 @@ export class UpperCaseCommand extends UICommand {
 
   _isEnabled = (state: EditorState): boolean => {
     const tr = state.tr;
-    if (!tr.selection.empty) {
-      return true;
-    }
-    return false;
+    return !tr.selection.empty;
   };
 
   // Logic to convert text to uppercase and assign them marks
@@ -50,7 +47,7 @@ export class UpperCaseCommand extends UICommand {
     return true;
   };
 
-  renderLabel() {
+  renderLabel(): null {
     return null;
   }
   isActive(): boolean {
