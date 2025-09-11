@@ -15,7 +15,7 @@
     "clean": "rm -rf dist/ coverage/ bin/ && rm -f modusoperandi-licit-changecase-*.*.*.tgz",
     "lint:ts": "eslint src --ext .ts,.tsx --fix",
     "lint": "npm run lint:ts",
-    "ci:build": "tsc --build && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json LICENSE dist",
+    "ci:build": "tsc --build && copyfiles --up 1 \"src/**/*.css\" dist  && copyfiles package.json LICENSE README.md dist",
     "test:unit": "jest --passWithNoTests",
     "test:coverage": "jest --coverage --passWithNoTests",
     "test": "jest --coverage",
