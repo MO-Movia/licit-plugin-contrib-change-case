@@ -26,14 +26,14 @@
   "peerDependencies": {
     "prosemirror-state": "^1.0.0",
     "prosemirror-transform": "^1.0.0",
-    "prosemirror-view": "^1.0.0",
+    "prosemirror-view": "^1.41.2",
     "@modusoperandi/licit-doc-attrs-step": "^1.0.0",
     "@modusoperandi/licit-ui-commands": "^1.0.0"
   },
   "devDependencies": {
     "prosemirror-state": "^1.0.0",
     "prosemirror-transform": "^1.0.0",
-    "prosemirror-view": "^1.0.0",
+    "prosemirror-view": "^1.41.2",
     "@modusoperandi/licit-doc-attrs-step": "^1.0.0",
     "@modusoperandi/licit-ui-commands": "^1.0.0",
     "@modusoperandi/eslint-config": "^2.1.4",
