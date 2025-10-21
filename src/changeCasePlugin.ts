@@ -31,7 +31,7 @@ export class ChangeCasePlugin extends Plugin {
               },
             ],
           };
-      
+
     }
 
 

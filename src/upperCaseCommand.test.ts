@@ -2,11 +2,11 @@ import { UpperCaseCommand } from './UpperCaseCommand';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Schema, Node } from 'prosemirror-model';
-import { Transform } from 'prosemirror-transform'
+import { Transform } from 'prosemirror-transform';
 
 describe('UpperCaseCommand', () => {
 
-    const plugin = new UpperCaseCommand()
+    const plugin = new UpperCaseCommand();
     const mySchema = new Schema({
         nodes: {
             // Define the document node
@@ -64,8 +64,8 @@ describe('UpperCaseCommand', () => {
     });
     it('should handle execute and return true', () => {
 
-        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy()
-    })
+        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy();
+    });
     it('should handle renderLabel and return null', () => {
         expect(plugin.renderLabel()).toBeNull();
     });

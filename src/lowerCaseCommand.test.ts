@@ -2,11 +2,11 @@ import { LowerCaseCommand } from './LowerCaseCommand';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Schema, Node } from 'prosemirror-model';
-import { Transform } from 'prosemirror-transform'
+import { Transform } from 'prosemirror-transform';
 
 describe('LowerCaseCommand', () => {
 
-    const plugin = new LowerCaseCommand()
+    const plugin = new LowerCaseCommand();
     const mySchema = new Schema({
         nodes: {
             // Define the document node
@@ -63,8 +63,8 @@ describe('LowerCaseCommand', () => {
     });
     it('should handle execute and return true', () => {
 
-        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy()
-    })
+        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy();
+    });
     it('should handle renderLabel and return null', () => {
         expect(plugin.renderLabel()).toBeNull();
     });

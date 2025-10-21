@@ -21,8 +21,9 @@
     "debug": "node --debug-brk --inspect ./node_modules/.bin/jest -i",
     "ci:bom": "cyclonedx-bom -o dist/bom.xml"
   },
-  "peerDependencies": {
-    "@modusoperandi/licit-ui-commands": "^1.0.0"
+  "dependencies": {
+   "@modusoperandi/licit-doc-attrs-step": "file:modusoperandi-licit-doc-attrs-step-1.0.3.tgz",
+   "@modusoperandi/licit-ui-commands": "file:modusoperandi-licit-ui-commands-1.0.9.tgz"
   },
   "devDependencies": {
     "@cyclonedx/bom": "^4.1.0",

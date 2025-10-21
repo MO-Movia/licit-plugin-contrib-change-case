@@ -1,12 +1,12 @@
-import { SentanceCaseCommand } from './SentanceCaseCommand';
+import { SentanceCaseCommand } from './SentenceCaseCommand';
 import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { Schema, Node } from 'prosemirror-model';
-import { Transform } from 'prosemirror-transform'
+import { Transform } from 'prosemirror-transform';
 
 describe('SentanceCaseCommand', () => {
 
-    const plugin = new SentanceCaseCommand()
+    const plugin = new SentanceCaseCommand();
     const mySchema = new Schema({
         nodes: {
             // Define the document node
@@ -62,7 +62,7 @@ describe('SentanceCaseCommand', () => {
     });
     it('should handle execute and return true', () => {
 
-        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy()
+        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy();
     });
     it('should handle execute and return true when prevnode is null', () => {
         const mySchema = new Schema({
@@ -112,8 +112,8 @@ describe('SentanceCaseCommand', () => {
         });
         const state = { tr: { selection: { empty: true }, scrollIntoView: () => { }, replaceWith: () => { } }, doc: mockdoc, selection: { from: 30, to: 50 ,$anchor:{nodeBefore:{text:'text'}}}, schema: mySchema } as unknown as EditorState;
 
-        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy()
-    })
+        expect(plugin.execute(state, () => { }, {} as unknown as EditorView)).toBeTruthy();
+    });
 
 
 
