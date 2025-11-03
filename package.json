@@ -1,6 +1,6 @@
 {
   "name": "@modusoperandi/licit-changecase",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "type": "module",
   "subversion": "1",
   "description": "changecase plugin built with ProseMirror",
@@ -22,8 +22,8 @@
     "ci:bom": "cyclonedx-bom -o dist/bom.xml"
   },
   "dependencies": {
-   "@modusoperandi/licit-doc-attrs-step": "file:modusoperandi-licit-doc-attrs-step-1.0.3.tgz",
-   "@modusoperandi/licit-ui-commands": "file:modusoperandi-licit-ui-commands-1.0.9.tgz"
+   "@modusoperandi/licit-doc-attrs-step": "file:modusoperandi-licit-doc-attrs-step-3.0.0.tgz",
+   "@modusoperandi/licit-ui-commands": "file:modusoperandi-licit-ui-commands-3.0.0.tgz"
   },
   "devDependencies": {
     "@cyclonedx/bom": "^4.1.0",

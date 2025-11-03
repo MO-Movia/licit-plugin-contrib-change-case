@@ -1,11 +1,19 @@
-import { EditorState } from 'prosemirror-state';
-import { Transform } from 'prosemirror-transform';
-import { EditorView } from 'prosemirror-view';
-import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
+import { EditorState } from "prosemirror-state";
+import { Transform } from "prosemirror-transform";
+import { EditorView } from "prosemirror-view";
+import { UICommand } from "@modusoperandi/licit-doc-attrs-step";
 
 // Code to convert the selected text into LowerCase
-
+// NOSONAR
 export class LowerCaseCommand extends UICommand {
+  executeCustomStyleForTable(
+    _state: EditorState,
+    tr: Transform,
+    _from: number,
+    _to: number
+  ): Transform {
+    return tr;
+  }
   // To check if any text is selected
 
   isEnabled = (state: EditorState): boolean => {

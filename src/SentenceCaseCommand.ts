@@ -1,11 +1,19 @@
-import { EditorState } from 'prosemirror-state';
-import { Transform } from 'prosemirror-transform';
-import { EditorView } from 'prosemirror-view';
-import { UICommand } from '@modusoperandi/licit-doc-attrs-step';
+import { EditorState } from "prosemirror-state";
+import { Transform } from "prosemirror-transform";
+import { EditorView } from "prosemirror-view";
+import { UICommand } from "@modusoperandi/licit-doc-attrs-step";
 
 // Code to convert the selected text into SentanceCase
-
+// NOSONAR
 export class SentanceCaseCommand extends UICommand {
+  executeCustomStyleForTable(
+    _state: EditorState,
+    tr: Transform,
+    _from: number,
+    _to: number
+  ): Transform {
+    return tr;
+  }
   // To check if any text is selected
 
   isEnabled = (state: EditorState): boolean => {
@@ -28,11 +36,11 @@ export class SentanceCaseCommand extends UICommand {
     const { from, to, $anchor } = state.selection;
     let tr = state.tr;
     let prevNode = null;
-    let paragraphContent = '';
+    let paragraphContent = "";
     tr = this.toLower(state, tr);
     state.doc.nodesBetween(from, to, (node, pos) => {
-      let currentSentence = '';
-      if (node.type.name === 'paragraph') {
+      let currentSentence = "";
+      if (node.type.name === "paragraph") {
         paragraphContent = node.textContent;
       }
       if (node.isText && pos <= to && pos + node.nodeSize >= from) {
@@ -62,10 +70,10 @@ export class SentanceCaseCommand extends UICommand {
   };
 
   parseSelectedText(txt: string) {
-    let retString = '';
+    let retString = "";
     const regex = /\s/; // Regex to split the string on one or more whitespace characters
     const txtArray = txt.split(regex);
-    let previousBlock = '';
+    let previousBlock = "";
     if (txtArray && txtArray.length > 1) {
       retString = txtArray
         .map((str, index) => {
@@ -80,7 +88,7 @@ export class SentanceCaseCommand extends UICommand {
             return str;
           }
         })
-        .join(' ');
+        .join(" ");
       return retString;
     } else {
       return txt;
@@ -91,26 +99,26 @@ export class SentanceCaseCommand extends UICommand {
     let isParagrphStart = false;
     if (prevCont && prevCont.trim().length > 0) {
       let delimeitorSepChars;
-      const charectersToInclude = ['>', '}', ')', ']', '"'];
+      const charectersToInclude = [">", "}", ")", "]", '"'];
       const startsWithSpaces = /^\s+/;
       const endWithSpaces = / +$/;
-      if (prevCont === '.' || prevCont === '?' || prevCont === '!') {
+      if (prevCont === "." || prevCont === "?" || prevCont === "!") {
         return true;
       }
-      delimeitorSepChars = prevCont.split('.');
+      delimeitorSepChars = prevCont.split(".");
       if (delimeitorSepChars && delimeitorSepChars.length == 1) {
-        delimeitorSepChars = prevCont.split('?');
+        delimeitorSepChars = prevCont.split("?");
       }
       if (delimeitorSepChars && delimeitorSepChars.length == 1) {
-        delimeitorSepChars = prevCont.split('!');
+        delimeitorSepChars = prevCont.split("!");
       }
       if (delimeitorSepChars.length > 0) {
         delimeitorSepChars = delimeitorSepChars.reverse();
         if (
           delimeitorSepChars.length > 1 &&
-          (delimeitorSepChars[0].trim() === '' ||
-            delimeitorSepChars[0].trim() === '?' ||
-            delimeitorSepChars[0].trim() === '!' ||
+          (delimeitorSepChars[0].trim() === "" ||
+            delimeitorSepChars[0].trim() === "?" ||
+            delimeitorSepChars[0].trim() === "!" ||
             endWithSpaces.test(prevCont) ||
             startsWithSpaces.test(currentString))
         ) {
